@@ -23,6 +23,13 @@ colorCircles.forEach(circle => {
     }
 });
 
+// Fonction pour calculer la différence en mois entre deux dates
+function getMonthsDifference(date1, date2) {
+    const yearDiff = date2.getFullYear() - date1.getFullYear();
+    const monthDiff = date2.getMonth() - date1.getMonth();
+    return yearDiff * 12 + monthDiff;
+}
+
 // Fonction pour calculer le décompte
 function startCountdown(birthday) {
     // Effacer l'intervalle précédent s'il existe
@@ -41,8 +48,10 @@ function startCountdown(birthday) {
 
         const timeDiff = nextBirthday - now;
 
-        // Calcul des mois, jours, heures, minutes et secondes
-        const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
+        // Calcul des mois
+        const months = getMonthsDifference(now, nextBirthday);
+
+        // Calcul des jours, heures, minutes et secondes
         const days = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
