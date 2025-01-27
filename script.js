@@ -85,7 +85,7 @@ calculateButton.addEventListener('click', () => {
 
         // Calculer l'âge
         const age = nextBirthday.getFullYear() - birthday.getFullYear();
-        ageDisplay.innerHTML = `Tu auras ${age} ans !`;
+        ageDisplay.innerHTML = `Tu auras ${age} ans à ta prochaine fête !`;
     }, 1000);
 
     // Réinitialiser tout si on clique à nouveau sur le bouton
