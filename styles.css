@@ -22,8 +22,10 @@ body {
     height: 30px;
     border-radius: 50%;
     cursor: pointer;
+    border: 2px solid #000; /* Bordure pour mieux voir le cercle blanc */
 }
 
+#white { background-color: white; }
 #red { background-color: red; }
 #blue { background-color: blue; }
 #green { background-color: green; }
@@ -61,6 +63,12 @@ button:hover {
 #countdown {
     font-size: 2rem;
     margin-top: 20px;
+    color: #333;
+}
+
+#age {
+    font-size: 1.5rem;
+    margin-top: 10px;
     color: #333;
 }
 
