@@ -40,14 +40,17 @@ function startCountdown(birthday) {
         }
 
         const timeDiff = nextBirthday - now;
-        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+        // Calcul des mois, jours, heures, minutes et secondes
+        const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
+        const days = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
         // Afficher le décompte
         countdownDisplay.innerHTML = `
-            Il reste ${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes avant ta fête !
+            Il reste ${months} mois, ${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes avant ta fête !
         `;
 
         // Calculer l'âge
