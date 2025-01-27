@@ -65,9 +65,13 @@ function startCountdown(birthday) {
         const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
         // Afficher le décompte
-        countdownDisplay.innerHTML = `
-            Il reste ${months} mois, ${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes avant ta fête !
-        `;
+        let countdownText = "Il reste ";
+        if (months > 0) {
+            countdownText += `${months} mois, `;
+        }
+        countdownText += `${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes avant ta fête !`;
+
+        countdownDisplay.innerHTML = countdownText;
 
         // Calculer l'âge
         const age = nextBirthday.getFullYear() - birthday.getFullYear();
