@@ -5,7 +5,6 @@ const birthdayInput = document.getElementById('birthday');
 const calculateButton = document.getElementById('calculate');
 const countdownDisplay = document.getElementById('countdown');
 const ageDisplay = document.getElementById('age');
-const balloonsContainer = document.getElementById('balloons-container');
 
 // Réinitialiser la couleur de fond
 document.getElementById('white').addEventListener('click', () => {
@@ -21,34 +20,6 @@ colorCircles.forEach(circle => {
     }
 });
 
-// Fonction pour créer un ballon
-function createBalloon() {
-    const balloon = document.createElement('div');
-    balloon.classList.add('balloon');
-
-    // Couleur aléatoire pour le ballon
-    const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    balloon.style.backgroundColor = randomColor;
-
-    // Position horizontale aléatoire
-    const randomX = Math.random() * window.innerWidth;
-    balloon.style.left = `${randomX}px`;
-
-    // Ajouter le ballon au conteneur
-    balloonsContainer.appendChild(balloon);
-
-    // Supprimer le ballon après l'animation
-    balloon.addEventListener('animationend', () => {
-        balloon.remove();
-    });
-}
-
-// Fonction pour arrêter et réinitialiser les ballons
-function resetBalloons() {
-    balloonsContainer.innerHTML = ''; // Supprime tous les ballons
-}
-
 // Calcul du décompte
 calculateButton.addEventListener('click', () => {
     const birthday = new Date(birthdayInput.value);
@@ -56,12 +27,6 @@ calculateButton.addEventListener('click', () => {
         alert("Entre une date valide !");
         return;
     }
-
-    // Réinitialiser les ballons
-    resetBalloons();
-
-    // Lancer l'animation des ballons
-    const balloonInterval = setInterval(createBalloon, 500); // Crée un ballon toutes les 500 ms
 
     // Mettre à jour le décompte en temps réel
     const countdownInterval = setInterval(() => {
@@ -90,8 +55,6 @@ calculateButton.addEventListener('click', () => {
 
     // Réinitialiser tout si on clique à nouveau sur le bouton
     calculateButton.addEventListener('click', () => {
-        clearInterval(balloonInterval);
         clearInterval(countdownInterval);
-        resetBalloons();
     }, { once: true }); // Ne s'exécute qu'une fois
 });
