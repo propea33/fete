@@ -46,25 +46,4 @@ input[type="date"] {
 button {
     font-size: 2rem;
     padding: 15px 30px;
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #ff3b2f;
-}
-
-#countdown {
-    font-size: 2rem;
-    margin-top: 20px;
-    color: #333;
-}
-
-/* Arrière-plans selon la saison */
-body.summer { background-image: url('summer.jpg'); }
-body.autumn { background-image: url('autumn.jpg'); }
-body.winter { background-image: url('winter.jpg'); }
-body.spring { background-image: url('spring.jpg'); }
+    background-color:
