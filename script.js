@@ -6,6 +6,9 @@ const calculateButton = document.getElementById('calculate');
 const countdownDisplay = document.getElementById('countdown');
 const ageDisplay = document.getElementById('age');
 
+// Variables pour gérer l'intervalle
+let countdownInterval = null;
+
 // Réinitialiser la couleur de fond
 document.getElementById('white').addEventListener('click', () => {
     body.style.backgroundColor = '#f0f0f0'; // Couleur de fond initiale
@@ -20,16 +23,15 @@ colorCircles.forEach(circle => {
     }
 });
 
-// Calcul du décompte
-calculateButton.addEventListener('click', () => {
-    const birthday = new Date(birthdayInput.value);
-    if (isNaN(birthday.getTime())) {
-        alert("Entre une date valide !");
-        return;
+// Fonction pour calculer le décompte
+function startCountdown(birthday) {
+    // Effacer l'intervalle précédent s'il existe
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
     }
 
     // Mettre à jour le décompte en temps réel
-    const countdownInterval = setInterval(() => {
+    countdownInterval = setInterval(() => {
         const now = new Date();
         let nextBirthday = new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate());
 
@@ -50,11 +52,22 @@ calculateButton.addEventListener('click', () => {
 
         // Calculer l'âge
         const age = nextBirthday.getFullYear() - birthday.getFullYear();
-        ageDisplay.innerHTML = `Tu auras ${age} ans à ta prochaine fête !`;
+        ageDisplay.innerHTML = `Tu auras ${age} ans !`;
     }, 1000);
+}
 
-    // Réinitialiser tout si on clique à nouveau sur le bouton
-    calculateButton.addEventListener('click', () => {
-        clearInterval(countdownInterval);
-    }, { once: true }); // Ne s'exécute qu'une fois
+// Gestion du clic sur le bouton
+calculateButton.addEventListener('click', () => {
+    const birthday = new Date(birthdayInput.value);
+    if (isNaN(birthday.getTime())) {
+        alert("Entre une date valide !");
+        return;
+    }
+
+    // Réinitialiser l'affichage
+    countdownDisplay.innerHTML = "";
+    ageDisplay.innerHTML = "";
+
+    // Démarrer le décompte
+    startCountdown(birthday);
 });
