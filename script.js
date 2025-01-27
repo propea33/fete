@@ -4,6 +4,7 @@ const body = document.body;
 const birthdayInput = document.getElementById('birthday');
 const calculateButton = document.getElementById('calculate');
 const countdownDisplay = document.getElementById('countdown');
+const balloonsContainer = document.getElementById('balloons-container');
 
 // Changement de couleur du site
 colorCircles.forEach(circle => {
@@ -11,6 +12,29 @@ colorCircles.forEach(circle => {
         body.style.backgroundColor = circle.id;
     });
 });
+
+// Fonction pour créer un ballon
+function createBalloon() {
+    const balloon = document.createElement('div');
+    balloon.classList.add('balloon');
+
+    // Couleur aléatoire pour le ballon
+    const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    balloon.style.backgroundColor = randomColor;
+
+    // Position horizontale aléatoire
+    const randomX = Math.random() * window.innerWidth;
+    balloon.style.left = `${randomX}px`;
+
+    // Ajouter le ballon au conteneur
+    balloonsContainer.appendChild(balloon);
+
+    // Supprimer le ballon après l'animation
+    balloon.addEventListener('animationend', () => {
+        balloon.remove();
+    });
+}
 
 // Calcul du décompte
 calculateButton.addEventListener('click', () => {
@@ -20,17 +44,8 @@ calculateButton.addEventListener('click', () => {
         return;
     }
 
-    // Définir la saison pour l'arrière-plan
-    const month = birthday.getMonth() + 1; // Les mois vont de 0 à 11
-    if (month >= 3 && month <= 5) {
-        body.className = 'spring';
-    } else if (month >= 6 && month <= 8) {
-        body.className = 'summer';
-    } else if (month >= 9 && month <= 11) {
-        body.className = 'autumn';
-    } else {
-        body.className = 'winter';
-    }
+    // Lancer l'animation des ballons
+    setInterval(createBalloon, 500); // Crée un ballon toutes les 500 ms
 
     // Mettre à jour le décompte en temps réel
     setInterval(() => {
